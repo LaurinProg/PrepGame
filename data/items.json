@@ -2,8 +2,12 @@
   {
     "id": "water",
     "name": "Wasser",
-    "tags": ["critical"],
-    "stress_reduction": 0
+    "tags": ["critical"]
+  },
+  {
+    "id": "food",
+    "name": "Konserven",
+    "tags": ["critical"]
   },
   {
     "id": "radio",
@@ -12,9 +16,20 @@
     "stress_reduction": 5
   },
   {
+    "id": "flashlight",
+    "name": "Taschenlampe",
+    "tags": ["light"],
+    "stress_reduction": 3
+  },
+  {
     "id": "book",
     "name": "Buch",
     "tags": ["entertainment"],
-    "stress_reduction": 3
+    "stress_reduction": 4
+  },
+  {
+    "id": "battery",
+    "name": "Batterien",
+    "tags": ["power"]
   }
 ]
