@@ -52,7 +52,6 @@ def check_game_over(state):
 
 
 def get_valid_events(state, events):
-
     valid = []
 
     for event in events:
@@ -60,6 +59,13 @@ def get_valid_events(state, events):
             valid.append(event)
 
     return valid
+
+
+def apply_effects(state, effects):
+    state.stress += effects.get("stress", 0)
+    state.information += effects.get("information", 0)
+    state.stress = max(0, min(100, state.stress))
+    state.information = max(0, min(100, state.information))
 
 
 def run_simulation():
