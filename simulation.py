@@ -7,6 +7,7 @@ from systems.stress_system import apply_stress_effects, apply_passive_stress
 from systems.atmosphere_system import get_atmosphere_text
 from systems.preparation_system import run_preparation_phase
 from systems.inventory_system import has_item
+from systems.item_effect_system import apply_passive_item_effects
 
 
 def apply_event(state, event):
@@ -35,6 +36,7 @@ def run_simulation():
         show_day_header(state.day)
 
         consume_resources(state)
+        apply_passive_item_effects(state)
         apply_passive_stress(state)
         apply_stress_effects(state)
 
