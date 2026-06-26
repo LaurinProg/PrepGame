@@ -1,23 +1,44 @@
 [
   {
-    "id": "power_outage",
-    "text": "Die Straßen bleiben dunkel. Kein Strom in Sicht.",
-    "effects": {
-      "stress": 10
-    }
+    "id": "radio_broadcast",
+    "text": "Über das Radio gibt es neue Informationen zur Lage.",
+    "conditions": {
+      "requires": ["radio"]
+    },
+    "choices": [
+      {
+        "text": "Den Nachrichten aufmerksam zuhören",
+        "effects": {
+          "stress": -10,
+          "information": 15
+        }
+      },
+      {
+        "text": "Das Radio ausschalten, um Energie zu sparen",
+        "effects": {
+          "stress": 5
+        }
+      }
+    ]
   },
   {
-    "id": "radio_news",
-    "text": "Über das Radio kommen neue Informationen durch.",
-    "effects": {
-      "stress": -5
-    }
-  },
-  {
-    "id": "strange_noise",
-    "text": "In der Nacht hört man entfernte Sirenen.",
-    "effects": {
-      "stress": 6
-    }
+    "id": "darkness",
+    "text": "Die Dunkelheit wirkt zunehmend bedrückend.",
+    "conditions": {},
+    "choices": [
+      {
+        "text": "Die Taschenlampe benutzen",
+        "requires": ["flashlight"],
+        "effects": {
+          "stress": -5
+        }
+      },
+      {
+        "text": "Im Dunkeln bleiben",
+        "effects": {
+          "stress": 8
+        }
+      }
+    ]
   }
 ]
