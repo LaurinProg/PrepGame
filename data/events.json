@@ -1,0 +1,23 @@
+[
+  {
+    "id": "power_outage",
+    "text": "Die Straßen bleiben dunkel. Kein Strom in Sicht.",
+    "effects": {
+      "stress": 10
+    }
+  },
+  {
+    "id": "radio_news",
+    "text": "Über das Radio kommen neue Informationen durch.",
+    "effects": {
+      "stress": -5
+    }
+  },
+  {
+    "id": "strange_noise",
+    "text": "In der Nacht hört man entfernte Sirenen.",
+    "effects": {
+      "stress": 6
+    }
+  }
+]
