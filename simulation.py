@@ -5,10 +5,8 @@ from systems.resource_system import consume_resources
 from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
 from systems.stress_system import apply_stress_effects, apply_passive_stress
 from systems.atmosphere_system import get_atmosphere_text
-
-
-def has_item(state, item_id):
-    return item_id in state.inventory
+from systems.preparation_system import run_preparation_phase
+from systems.inventory_system import has_item
 
 
 def apply_event(state, event):
@@ -29,7 +27,7 @@ def check_game_over(state):
 
 def run_simulation():
     state = GameState()
-
+    run_preparation_phase(state)
     events = load_events()
 
     while state.running:
