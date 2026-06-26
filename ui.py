@@ -18,3 +18,22 @@ def show_status(state):
 
 def show_event(text):
     console.print(f"\n[yellow]{text}[/yellow]\n")
+
+
+def choose_option(choices):
+
+    console.print()
+
+    for index, choice in enumerate(choices, start=1):
+        console.print(f"{index}. {choice['text']}")
+
+    while True:
+
+        user_input = input("\nEntscheidung: ")
+
+        if user_input.isdigit():
+
+            number = int(user_input)
+
+            if 1 <= number <= len(choices):
+                return choices[number - 1]
