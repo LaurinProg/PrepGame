@@ -11,6 +11,7 @@ def show_day_header(day):
 def show_status(state):
     console.print(
         f"[bold]Stress:[/bold] {state['stress']} | "
+        f"[bold]Info:[/bold] {state['information']} | "
         f"[bold]Wasser:[/bold] {state['water']} | "
         f"[bold]Nahrung:[/bold] {state['food']}"
     )

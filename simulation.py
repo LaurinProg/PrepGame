@@ -1,5 +1,5 @@
 from events import load_events, get_random_event, event_matches_conditions
-from ui import show_day_header, show_status, show_event
+from ui import show_day_header, show_status, show_event, choose_option
 
 
 class GameState:
@@ -18,6 +18,14 @@ class GameState:
         ]
 
         self.running = True
+
+    def to_dict(self):
+        return {
+            "stress": self.stress,
+            "information": self.information,
+            "water": self.water,
+            "food": self.food
+        }
 
 
 def has_item(state, item_id):
@@ -79,11 +87,32 @@ def run_simulation():
 
         consume_resources(state)
 
-        event = get_random_event(events)
+        valid_events = get_valid_events(state, events)
+
+        event = get_random_event(valid_events)
 
         show_event(event["text"])
 
-        apply_event(state, event)
+        choices = event["choices"]
+
+        available_choices = []
+
+        for choice in choices:
+
+            requirements = choice.get("requires", [])
+
+            allowed = True
+
+            for req in requirements:
+                if not has_item(state, req):
+                    allowed = False
+
+            if allowed:
+                available_choices.append(choice)
+
+        selected_choice = choose_option(available_choices)
+
+        apply_effects(state, selected_choice["effects"])
 
         show_status(state.to_dict())
 
