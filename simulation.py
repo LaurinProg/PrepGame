@@ -8,14 +8,16 @@ class GameState:
         self.stress = 20
         self.water = 10
         self.food = 10
-        self.running = True
 
-    def to_dict(self):
-        return {
-            "stress": self.stress,
-            "water": self.water,
-            "food": self.food
-        }
+        self.information = 50
+
+        self.inventory = [
+            "radio",
+            "flashlight",
+            "book"
+        ]
+
+        self.running = True
 
 
 def consume_resources(state):
