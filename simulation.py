@@ -20,6 +20,10 @@ class GameState:
         self.running = True
 
 
+def has_item(state, item_id):
+    return item_id in state.inventory
+
+
 def consume_resources(state):
     state.water -= 1
     state.food -= 1
