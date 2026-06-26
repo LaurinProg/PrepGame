@@ -1,0 +1,20 @@
+[
+  {
+    "id": "water",
+    "name": "Wasser",
+    "tags": ["critical"],
+    "stress_reduction": 0
+  },
+  {
+    "id": "radio",
+    "name": "Kurbelradio",
+    "tags": ["information"],
+    "stress_reduction": 5
+  },
+  {
+    "id": "book",
+    "name": "Buch",
+    "tags": ["entertainment"],
+    "stress_reduction": 3
+  }
+]
