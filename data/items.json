@@ -2,34 +2,57 @@
   {
     "id": "water",
     "name": "Wasser",
-    "tags": ["critical"]
+    "tags": ["critical"],
+    "weight": 2,
+    "stress_reduction": 0,
+    "description": "Trinkwasser für mehrere Tage."
   },
   {
     "id": "food",
     "name": "Konserven",
-    "tags": ["critical"]
+    "tags": ["critical"],
+    "weight": 2,
+    "stress_reduction": 0,
+    "description": "Haltbare Nahrung."
   },
   {
     "id": "radio",
     "name": "Kurbelradio",
     "tags": ["information"],
-    "stress_reduction": 5
+    "weight": 1,
+    "stress_reduction": 5,
+    "description": "Empfängt Notfallmeldungen."
   },
   {
     "id": "flashlight",
     "name": "Taschenlampe",
     "tags": ["light"],
-    "stress_reduction": 3
+    "weight": 1,
+    "stress_reduction": 3,
+    "description": "Erzeugt Licht im Dunkeln."
+  },
+  {
+    "id": "battery",
+    "name": "Batterien",
+    "tags": ["power"],
+    "weight": 1,
+    "stress_reduction": 0,
+    "description": "Energieversorgung für Geräte."
   },
   {
     "id": "book",
     "name": "Buch",
     "tags": ["entertainment"],
-    "stress_reduction": 4
+    "weight": 1,
+    "stress_reduction": 4,
+    "description": "Hilft gegen Stress und Langeweile."
   },
   {
-    "id": "battery",
-    "name": "Batterien",
-    "tags": ["power"]
+    "id": "medkit",
+    "name": "Medikamente",
+    "tags": ["medical"],
+    "weight": 2,
+    "stress_reduction": 1,
+    "description": "Wichtige medizinische Versorgung."
   }
 ]
