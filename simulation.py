@@ -1,46 +1,14 @@
-from events import load_events, get_random_event, event_matches_conditions
-from ui import show_day_header, show_status, show_event, choose_option
+from ui import show_day_header, show_status, show_event, show_atmosphere, choose_option
 
-
-class GameState:
-    def __init__(self):
-        self.day = 1
-        self.stress = 20
-        self.water = 10
-        self.food = 10
-
-        self.information = 50
-
-        self.inventory = [
-            "radio",
-            "flashlight",
-            "book"
-        ]
-
-        self.running = True
-
-    def to_dict(self):
-        return {
-            "stress": self.stress,
-            "information": self.information,
-            "water": self.water,
-            "food": self.food
-        }
+from state import GameState
+from systems.resource_system import consume_resources
+from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
+from systems.stress_system import apply_stress_effects, apply_passive_stress
+from systems.atmosphere_system import get_atmosphere_text
 
 
 def has_item(state, item_id):
     return item_id in state.inventory
-
-
-def consume_resources(state):
-    state.water -= 1
-    state.food -= 1
-
-    if state.water <= 3:
-        state.stress += 10
-
-    if state.food <= 3:
-        state.stress += 5
 
 
 def apply_event(state, event):
@@ -59,23 +27,6 @@ def check_game_over(state):
         state.running = False
 
 
-def get_valid_events(state, events):
-    valid = []
-
-    for event in events:
-        if event_matches_conditions(state, event):
-            valid.append(event)
-
-    return valid
-
-
-def apply_effects(state, effects):
-    state.stress += effects.get("stress", 0)
-    state.information += effects.get("information", 0)
-    state.stress = max(0, min(100, state.stress))
-    state.information = max(0, min(100, state.information))
-
-
 def run_simulation():
     state = GameState()
 
@@ -86,21 +37,18 @@ def run_simulation():
         show_day_header(state.day)
 
         consume_resources(state)
+        apply_passive_stress(state)
+        apply_stress_effects(state)
 
         valid_events = get_valid_events(state, events)
-
         event = get_random_event(valid_events)
-
         show_event(event["text"])
 
         choices = event["choices"]
-
         available_choices = []
 
         for choice in choices:
-
             requirements = choice.get("requires", [])
-
             allowed = True
 
             for req in requirements:
@@ -115,6 +63,8 @@ def run_simulation():
         apply_effects(state, selected_choice["effects"])
 
         show_status(state.to_dict())
+        atmosphere_text = get_atmosphere_text(state)
+        show_atmosphere(atmosphere_text)
 
         check_game_over(state)
 

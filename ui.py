@@ -21,6 +21,10 @@ def show_event(text):
     console.print(f"\n[yellow]{text}[/yellow]\n")
 
 
+def show_atmosphere(text):
+    console.print(f"\n[italic]{text}[/italic]")
+
+
 def choose_option(choices):
 
     console.print()
