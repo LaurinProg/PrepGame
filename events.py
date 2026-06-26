@@ -12,3 +12,16 @@ def load_events():
 
 def get_random_event(events):
     return random.choice(events)
+
+
+def event_matches_conditions(state, event):
+
+    conditions = event.get("conditions", {})
+
+    required_items = conditions.get("requires", [])
+
+    for item in required_items:
+        if item not in state.inventory:
+            return False
+
+    return True

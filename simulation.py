@@ -1,4 +1,4 @@
-from events import load_events, get_random_event
+from events import load_events, get_random_event, event_matches_conditions
 from ui import show_day_header, show_status, show_event
 
 
@@ -49,6 +49,17 @@ def check_game_over(state):
     if state.stress >= 100:
         print("\nDie Situation eskaliert völlig.")
         state.running = False
+
+
+def get_valid_events(state, events):
+
+    valid = []
+
+    for event in events:
+        if event_matches_conditions(state, event):
+            valid.append(event)
+
+    return valid
 
 
 def run_simulation():
