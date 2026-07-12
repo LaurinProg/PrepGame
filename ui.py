@@ -1,5 +1,6 @@
 from rich.console import Console
 from rich.panel import Panel
+from config import MAX_INVENTORY_WEIGHT
 
 console = Console()
 
@@ -51,7 +52,7 @@ def show_status(state, items):
         f"Informationslage:\n"
         f"{info_bar} {state.information}/100\n\n"
         f"Gewicht:\n"
-        f"{weight}/10\n\n"
+        f"{weight}/{MAX_INVENTORY_WEIGHT}\n\n"
         f"Lageeinschätzung:\n"
         f"{condition}"
     )

@@ -2,7 +2,8 @@ import json
 import random
 from pathlib import Path
 
-from systems.inventory_system import has_item, remove_item
+from systems.inventory_system import has_item
+from systems.effect_system import apply_effects
 
 
 def load_events():
@@ -17,13 +18,23 @@ def get_valid_events(state, events):
 
     for event in events:
         conditions = event.get("conditions", {})
-        required_items = conditions.get("requires", [])
-
         allowed = True
+
+        required_items = conditions.get("requires", [])
 
         for item in required_items:
             if not has_item(state.inventory, item):
                 allowed = False
+
+        min_day = conditions.get("min_day")
+
+        if min_day and state.day < min_day:
+            allowed = False
+
+        max_stress = conditions.get("max_stress")
+
+        if max_stress and state.stress > max_stress:
+            allowed = False
 
         if allowed:
             valid.append(event)
@@ -44,18 +55,3 @@ def get_random_event(events):
         }
 
     return random.choice(events)
-
-
-def apply_effects(state, effects, consume=None):
-    state.stress += effects.get("stress", 0)
-    state.information += effects.get("information", 0)
-
-    if consume:
-        for item_id, amount in consume.items():
-            remove_item(
-                state.inventory,
-                item_id,
-                amount
-            )
-
-    state.clamp_values()

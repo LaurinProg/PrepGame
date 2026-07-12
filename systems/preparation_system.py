@@ -6,11 +6,9 @@ from systems.inventory_system import (
     get_quantity,
     calculate_inventory_weight
 )
+from config import MAX_INVENTORY_WEIGHT
 
 console = Console()
-
-MAX_WEIGHT = 10
-
 
 def show_selected_items(selected_inventory, items):
 
@@ -56,7 +54,7 @@ def run_preparation_phase(state):
         console.print("\n[bold cyan]VORBEREITUNGSPHASE[/bold cyan]")
         console.print("\nDu kannst Vorräte für die Krise auswählen.")
 
-        console.print(f"\nMaximales Gewicht: {MAX_WEIGHT}")
+        console.print(f"\nMaximales Gewicht: {MAX_INVENTORY_WEIGHT}")
         console.print(f"Aktuelles Gewicht: {current_weight}")
 
         show_selected_items(selected_inventory, items)
@@ -81,7 +79,7 @@ def run_preparation_phase(state):
 
         new_weight = (current_weight + item["weight"])
 
-        if new_weight > MAX_WEIGHT:
+        if new_weight > MAX_INVENTORY_WEIGHT:
             console.print("\n[red]Dieses Gewicht kann nicht mehr getragen werden.[/red]")
 
             input("\nENTER drücken...")

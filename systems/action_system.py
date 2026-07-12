@@ -1,4 +1,5 @@
 from systems.inventory_system import has_item, remove_item
+from systems.effect_system import apply_effects
 
 ACTIONS = {
     "radio": {
@@ -44,13 +45,27 @@ def show_actions(actions):
 
 def execute_action(state, action):
     if action == "radio":
-        remove_item(state.inventory, "battery")
-        state.information += 10
-        state.stress -= 2
+        apply_effects(
+            state,
+            {
+                "information": 10,
+                "stress": -2
+            },
+            {
+                "battery": 1
+            }
+        )
+
         print("\nDas Radio empfängt neue Informationen.")
 
     elif action == "book":
-        state.stress -= 5
+        apply_effects(
+            state,
+            {
+                "stress": -5
+            }
+        )
+
         print("\nEin paar ruhige Minuten helfen.")
 
     elif action == "nothing":

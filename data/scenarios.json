@@ -1,0 +1,41 @@
+[
+  {
+    "id": "blackout",
+    "name": "Großer Stromausfall",
+    "description": "Die Stromversorgung fällt großflächig aus. Informationen und Licht werden zu wertvollen Ressourcen.",
+    "effects": {
+      "information": -10,
+      "stress": 10
+    },
+    "events": [
+      "power_outage",
+      "darkness",
+      "battery_problem"
+    ]
+  },
+  {
+    "id": "flood",
+    "name": "Hochwasserlage",
+    "description": "Wasserwege sind blockiert und die Versorgung wird schwieriger.",
+    "effects": {
+      "stress": 15
+    },
+    "events": [
+      "cold_night",
+      "uncertain_information"
+    ]
+  },
+  {
+    "id": "pandemic",
+    "name": "Längere Isolation",
+    "description": "Die größte Belastung entsteht durch Unsicherheit und soziale Isolation.",
+    "effects": {
+      "stress": 5,
+      "information": -5
+    },
+    "events": [
+      "loneliness",
+      "rumors"
+    ]
+  }
+]
