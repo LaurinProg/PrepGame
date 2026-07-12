@@ -36,6 +36,12 @@ def get_valid_events(state, events):
         if max_stress and state.stress > max_stress:
             allowed = False
 
+        required_modifiers = conditions.get("modifiers", [])
+
+        for modifier in required_modifiers:
+            if not state.modifiers.get(modifier, False):
+                allowed = False
+
         if allowed:
             valid.append(event)
 

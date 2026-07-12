@@ -79,7 +79,10 @@
     "id": "power_outage",
     "text": "Die letzten Lichtquellen fallen aus. Die Dunkelheit verändert die Atmosphäre im Raum.",
     "conditions": {
-      "min_day": 1
+      "min_day": 1,
+      "modifiers": [
+          "darkness"
+        ]
     },
     "choices": [
       {
