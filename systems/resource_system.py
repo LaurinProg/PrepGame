@@ -1,5 +1,6 @@
-def consume_resources(state):
-    state.water -= 1
-    state.food -= 1
+from systems.inventory_system import remove_item
 
-    state.clamp_values()
+
+def consume_resources(state):
+    remove_item(state.inventory, "water")
+    remove_item(state.inventory, "food")

@@ -1,4 +1,5 @@
 from rich.console import Console
+from ui import clear_screen
 from systems.inventory_system import (
     load_items,
     add_item,
@@ -48,7 +49,8 @@ def run_preparation_phase(state):
     selected_inventory = {}
 
     while True:
-        console.clear()
+        clear_screen()
+
         current_weight = calculate_inventory_weight(selected_inventory, items)
 
         console.print("\n[bold cyan]VORBEREITUNGSPHASE[/bold cyan]")

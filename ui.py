@@ -3,6 +3,9 @@ from rich.panel import Panel
 
 console = Console()
 
+def clear_screen():
+    console.clear()
+
 
 def show_day_header(day):
     console.print(Panel(f"TAG {day}", style="bold white"))
@@ -15,6 +18,22 @@ def show_status(state):
         f"[bold]Wasser:[/bold] {state['water']} | "
         f"[bold]Nahrung:[/bold] {state['food']}"
     )
+
+
+def show_inventory(inventory, items):
+    console.print("\n[bold]Inventar:[/bold]")
+
+    if not inventory:
+        console.print("Keine Gegenstände vorhanden.")
+        return
+
+    for item in items:
+        quantity = inventory.get(item["id"], 0)
+
+        if quantity > 0:
+            console.print(
+                f"- {item['name']} x{quantity}"
+            )
 
 
 def show_event(text):

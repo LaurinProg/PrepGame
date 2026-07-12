@@ -1,13 +1,13 @@
-from ui import show_day_header, show_status, show_event, show_atmosphere, choose_option
-
+from ui import show_day_header, show_status, show_event, show_atmosphere, choose_option, show_inventory, clear_screen
 from state import GameState
 from systems.resource_system import consume_resources
 from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
 from systems.stress_system import apply_stress_effects, apply_passive_stress
 from systems.atmosphere_system import get_atmosphere_text
 from systems.preparation_system import run_preparation_phase
-from systems.inventory_system import has_item
+from systems.inventory_system import has_item, get_quantity, load_items
 from systems.item_effect_system import apply_passive_item_effects
+from systems.action_system import run_actions
 
 
 def apply_event(state, event):
@@ -17,8 +17,12 @@ def apply_event(state, event):
 
 
 def check_game_over(state):
-    if state.water <= 0:
+    if get_quantity(state.inventory, "water") <= 0:
         print("\nIhr habt kein Wasser mehr.")
+        state.running = False
+
+    if get_quantity(state.inventory, "food") <= 0:
+        print("\nIhr habt keine Nahrung mehr.")
         state.running = False
 
     if state.stress >= 100:
@@ -30,12 +34,15 @@ def run_simulation():
     state = GameState()
     run_preparation_phase(state)
     events = load_events()
+    items = load_items()
 
     while state.running:
-
+        clear_screen()
         show_day_header(state.day)
+        show_inventory(state.inventory, items)
 
         consume_resources(state)
+        run_actions(state)
         apply_passive_item_effects(state)
         apply_passive_stress(state)
         apply_stress_effects(state)

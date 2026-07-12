@@ -1,8 +1,14 @@
+from systems.inventory_system import get_quantity, remove_item
+
+
 def apply_passive_stress(state):
-    if state.water <= 3:
+    water = get_quantity(state.inventory, "water")
+    food = get_quantity(state.inventory, "food")
+
+    if water <= 3:
         state.stress += 6
 
-    if state.food <= 3:
+    if food <= 3:
         state.stress += 4
 
     if state.information <= 30:
@@ -19,6 +25,6 @@ def apply_stress_effects(state):
         state.information -= 3
 
     if state.stress >= 85:
-        state.food -= 1
+        remove_item(state.inventory, "food")
 
     state.clamp_values()
