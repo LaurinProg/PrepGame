@@ -3,6 +3,11 @@
     "id": "blackout",
     "name": "Großer Stromausfall",
     "description": "Die Stromversorgung fällt großflächig aus. Licht und Informationen werden wertvoll.",
+    "information": [
+      "Mehrere Regionen melden ungewöhnliche Stromschwankungen.",
+      "Die Kommunikation könnte eingeschränkt werden.",
+      "Es gibt Hinweise auf einen längeren Ausfall."
+    ],
     "effects": {
       "information": -10,
       "stress": 10
@@ -21,6 +26,11 @@
     "id": "flood",
     "name": "Hochwasserlage",
     "description": "Versorgungswege sind eingeschränkt und die Umgebung wird zunehmend schwierig.",
+    "information": [
+      "Starke Regenfälle halten seit Tagen an.",
+      "Einige Verkehrswege könnten bald unpassierbar werden.",
+      "Die Versorgungslage ist schwer einzuschätzen."
+    ],
     "effects": {
       "stress": 15
     },
@@ -37,6 +47,11 @@
     "id": "pandemic",
     "name": "Längere Isolation",
     "description": "Die größte Belastung entsteht durch Unsicherheit und fehlenden sozialen Kontakt.",
+    "information": [
+      "Die Zahl ungewöhnlicher Krankheitsfälle steigt.",
+      "Behörden empfehlen Vorsichtsmaßnahmen.",
+      "Die Dauer der Situation ist unklar."
+    ],
     "effects": {
       "stress": 5,
       "information": -5

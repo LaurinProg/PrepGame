@@ -1,3 +1,4 @@
+import random
 from rich.console import Console
 
 console = Console()
@@ -12,9 +13,14 @@ def run_information_phase(scenario):
         "Es gibt erste Hinweise auf eine kommende Krise.\n"
     )
 
-    console.print(
-        f"[yellow]{scenario['description']}[/yellow]\n"
-    )
+    hints = scenario.get("information", [])
+
+    if hints:
+        hint = random.choice(hints)
+
+        console.print(
+            f"[yellow]{hint}[/yellow]\n"
+        )
 
     console.print(
         "Die Informationen sind unvollständig. "
