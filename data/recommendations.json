@@ -1,0 +1,50 @@
+[
+  {
+    "id": "water",
+    "title": "Trinkwasservorrat",
+    "related_items": [
+      "water"
+    ],
+    "recommendation": "Eine ausreichende Trinkwasserversorgung ist eine der wichtigsten Grundlagen der Notfallvorsorge.",
+    "evaluate": "quantity",
+    "target": 10
+  },
+  {
+    "id": "food",
+    "title": "Lebensmittelvorrat",
+    "related_items": [
+      "food"
+    ],
+    "recommendation": "Ein Vorrat an haltbaren Lebensmitteln erhöht die Selbstständigkeit in Krisensituationen.",
+    "evaluate": "quantity",
+    "target": 10
+  },
+  {
+    "id": "information",
+    "title": "Informationsversorgung",
+    "related_items": [
+      "radio"
+    ],
+    "recommendation": "Aktuelle Informationen helfen, Entscheidungen besser einzuschätzen und Unsicherheit zu reduzieren.",
+    "evaluate": "presence"
+  },
+  {
+    "id": "light",
+    "title": "Licht und Energie",
+    "related_items": [
+      "flashlight",
+      "battery"
+    ],
+    "recommendation": "Lichtquellen und Energieversorgung helfen besonders bei Stromausfällen.",
+    "evaluate": "presence"
+  },
+  {
+    "id": "stress_management",
+    "title": "Psychische Stabilität",
+    "related_items": [
+      "book"
+    ],
+    "recommendation": "Beschäftigung, Routinen und Möglichkeiten zur Stressreduktion unterstützen die Bewältigung längerer Krisen.",
+    "evaluate": "stress"
+  }
+]

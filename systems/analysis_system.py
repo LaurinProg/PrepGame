@@ -1,5 +1,9 @@
 from rich.console import Console
 from rich.panel import Panel
+from systems.recommendation_system import (
+    load_recommendations,
+    evaluate_recommendations
+)
 
 console = Console()
 
@@ -51,6 +55,7 @@ def show_analysis(state):
     )
 
     show_stress_sources(stats)
+    show_recommendations(state)
 
 
 def show_stress_sources(stats):
@@ -71,4 +76,41 @@ def show_stress_sources(stats):
     for name, value in sorted_sources:
         console.print(
             f"- {name}: +{value}"
+        )
+
+
+def show_recommendations(state):
+
+    recommendations = load_recommendations()
+
+    results = evaluate_recommendations(
+        state,
+        recommendations
+    )
+
+    console.print(
+        "\n[bold cyan]Vorsorgevergleich:[/bold cyan]"
+    )
+
+    for result in results:
+
+        if result["status"] in [
+            "erfüllt",
+            "vorbereitet",
+            "stabil"
+        ]:
+            symbol = "✓"
+        else:
+            symbol = "!"
+
+        console.print(
+            f"\n{symbol} {result['title']}"
+        )
+
+        console.print(
+            f"  Status: {result['status']}"
+        )
+
+        console.print(
+            f"  {result['recommendation']}"
         )
