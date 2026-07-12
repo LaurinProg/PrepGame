@@ -3,7 +3,10 @@
     "id": "radio_broadcast",
     "text": "Über das Radio gibt es neue Informationen zur Lage.",
     "conditions": {
-      "requires": ["radio"]
+      "requires": [
+        "radio",
+        "battery"
+      ]
     },
     "choices": [
       {
@@ -11,6 +14,9 @@
         "effects": {
           "stress": -10,
           "information": 15
+        },
+        "consume": {
+          "battery": 1
         }
       },
       {
@@ -23,20 +29,48 @@
   },
   {
     "id": "darkness",
-    "text": "Die Dunkelheit wirkt zunehmend bedrückend.",
+    "text": "Die Dunkelheit wirkt zunehmend bedrückend. Geräusche aus der Umgebung verstärken die Unsicherheit.",
     "conditions": {},
     "choices": [
       {
         "text": "Die Taschenlampe benutzen",
-        "requires": ["flashlight"],
+        "requires": [
+          "flashlight",
+          "battery"
+        ],
         "effects": {
           "stress": -5
+        },
+        "consume": {
+          "battery": 1
         }
       },
       {
         "text": "Im Dunkeln bleiben",
         "effects": {
           "stress": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "sleep_problems",
+    "text": "Die Nacht war unruhig. Die fehlende Routine beginnt sich bemerkbar zu machen.",
+    "conditions": {},
+    "choices": [
+      {
+        "text": "Eine ruhige Beschäftigung suchen",
+        "requires": [
+          "book"
+        ],
+        "effects": {
+          "stress": -4
+        }
+      },
+      {
+        "text": "Versuchen weiterzuschlafen",
+        "effects": {
+          "stress": 3
         }
       }
     ]

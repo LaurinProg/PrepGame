@@ -42,7 +42,9 @@ def run_simulation():
         show_inventory(state.inventory, items)
 
         consume_resources(state)
+
         run_actions(state)
+
         apply_passive_item_effects(state)
         apply_passive_stress(state)
         apply_stress_effects(state)
@@ -67,7 +69,7 @@ def run_simulation():
 
         selected_choice = choose_option(available_choices)
 
-        apply_effects(state, selected_choice["effects"])
+        apply_effects(state, selected_choice["effects"], selected_choice.get("consume"))
 
         show_status(state.to_dict())
         atmosphere_text = get_atmosphere_text(state)
