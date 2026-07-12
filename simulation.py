@@ -69,7 +69,7 @@ def run_simulation():
 
         apply_effects(state, selected_choice["effects"], selected_choice.get("consume"))
 
-        show_status(state)
+        show_status(state, items)
         atmosphere_text = get_atmosphere_text(state)
         show_atmosphere(atmosphere_text)
 
