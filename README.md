@@ -152,7 +152,7 @@ Die Trennung von Spielsystemen, Daten und Darstellung ermöglicht eine einfache 
 Repository klonen:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/LaurinProg/PrepGame
 ```
 
 In das Projektverzeichnis wechseln:
