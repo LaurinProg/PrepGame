@@ -1,41 +1,37 @@
 from rich.console import Console
-
-from systems.inventory_system import load_items
+from systems.inventory_system import (
+    load_items,
+    add_item,
+    get_quantity,
+    calculate_inventory_weight
+)
 
 console = Console()
 
 MAX_WEIGHT = 10
 
 
-def calculate_selected_weight(selected_items):
-    total = 0
+def show_selected_items(selected_inventory, items):
 
-    for item in selected_items:
-        total += item.get("weight", 0)
-
-    return total
-
-
-def show_selected_items(selected_items):
     console.print("\n[bold]Ausgewählte Gegenstände:[/bold]")
-
-    if not selected_items:
+    if not selected_inventory:
         console.print("Noch keine Gegenstände ausgewählt.")
         return
 
-    for item in selected_items:
-        console.print(
-            f"- {item['name']} "
-            f"(Gewicht: {item['weight']})"
-        )
+    for item in items:
+        quantity = selected_inventory.get(item["id"], 0)
+
+        if quantity > 0:
+            console.print(
+                f"- {item['name']} x{quantity} "
+                f"(Gewicht: {item['weight']})"
+            )
 
 
 def show_available_items(items):
-
     console.print("\n[bold]Verfügbare Gegenstände:[/bold]\n")
 
     for index, item in enumerate(items, start=1):
-
         console.print(
             f"{index}. "
             f"{item['name']} "
@@ -49,11 +45,11 @@ def show_available_items(items):
 
 def run_preparation_phase(state):
     items = load_items()
-    selected_items = []
+    selected_inventory = {}
 
     while True:
         console.clear()
-        current_weight = calculate_selected_weight(selected_items)
+        current_weight = calculate_inventory_weight(selected_inventory, items)
 
         console.print("\n[bold cyan]VORBEREITUNGSPHASE[/bold cyan]")
         console.print("\nDu kannst Vorräte für die Krise auswählen.")
@@ -61,7 +57,7 @@ def run_preparation_phase(state):
         console.print(f"\nMaximales Gewicht: {MAX_WEIGHT}")
         console.print(f"Aktuelles Gewicht: {current_weight}")
 
-        show_selected_items(selected_items)
+        show_selected_items(selected_inventory, items)
         show_available_items(items)
 
         console.print("\n0. Vorbereitung abschließen")
@@ -89,9 +85,6 @@ def run_preparation_phase(state):
             input("\nENTER drücken...")
             continue
 
-        selected_items.append(item)
+        add_item(selected_inventory, item["id"])
 
-    state.inventory = [
-        item["id"]
-        for item in selected_items
-    ]
+    state.inventory = selected_inventory

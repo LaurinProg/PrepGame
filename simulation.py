@@ -52,7 +52,7 @@ def run_simulation():
             allowed = True
 
             for req in requirements:
-                if not has_item(state, req):
+                if not has_item(state.inventory, req):
                     allowed = False
 
             if allowed:

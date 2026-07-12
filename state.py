@@ -10,11 +10,11 @@ class GameState:
         self.water = 10
         self.food = 10
 
-        self.inventory = [
-            "radio",
-            "flashlight",
-            "book"
-        ]
+        self.inventory = {
+            "radio": 1,
+            "flashlight": 1,
+            "book": 1
+        }
 
         self.running = True
 
