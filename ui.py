@@ -46,7 +46,14 @@ def show_status(state, items):
     else:
         condition = "Stabile Situation"
 
+    scenario_name = "Unbekannte Krise"
+
+    if state.scenario:
+        scenario_name = state.scenario["name"]
+
     content = (
+        f"Szenario:\n"
+        f"{scenario_name}\n\n"
         f"Psychische Belastung:\n"
         f"{stress_bar} {state.stress}/100\n\n"
         f"Informationslage:\n"

@@ -1,4 +1,4 @@
-from ui import render_game, show_status, show_event, show_atmosphere, choose_option
+from ui import render_game, show_status, show_event, show_atmosphere, choose_option, clear_screen
 from state import GameState
 from systems.resource_system import consume_resources
 from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
@@ -8,6 +8,8 @@ from systems.preparation_system import run_preparation_phase
 from systems.inventory_system import has_item, get_quantity, load_items
 from systems.item_effect_system import apply_passive_item_effects
 from systems.action_system import run_actions
+from systems.scenario_system import load_scenarios, choose_scenario, apply_scenario_effects
+from systems.information_system import run_information_phase
 
 
 def apply_event(state, event):
@@ -32,6 +34,14 @@ def check_game_over(state):
 
 def run_simulation():
     state = GameState()
+
+    clear_screen()
+    scenarios = load_scenarios()
+    scenario = choose_scenario(scenarios)
+    state.scenario = scenario
+    run_information_phase(scenario)
+    apply_scenario_effects(state, scenario)
+
     run_preparation_phase(state)
     events = load_events()
     items = load_items()

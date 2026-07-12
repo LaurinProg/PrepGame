@@ -3,6 +3,7 @@ class GameState:
     def __init__(self):
 
         self.day = 1
+        self.scenario = None
 
         self.stress = 20
         self.information = 50
