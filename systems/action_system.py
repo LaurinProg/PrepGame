@@ -46,32 +46,23 @@ def show_actions(actions):
 def execute_action(state, action):
     state.statistics["actions_taken"] += 1
 
-    if action == "radio":
-        apply_effects(
-            state,
-            {
-                "information": 10,
-                "stress": -2
-            },
-            {
-                "battery": 1
-            }
-        )
+    result = {
+        "name": ACTIONS[action]["name"],
+        "text": ""
+    }
 
-        print("\nDas Radio empfängt neue Informationen.")
+    if action == "radio":
+        apply_effects(state, {"information": 10, "stress": -2}, {"battery": 1})
+        result["text"] = "Neue Informationen wurden empfangen."
 
     elif action == "book":
-        apply_effects(
-            state,
-            {
-                "stress": -5
-            }
-        )
-
-        print("\nEin paar ruhige Minuten helfen.")
+        apply_effects(state, {"stress": -5})
+        result["text"] = "Die Ruhephase hilft, Stress abzubauen."
 
     elif action == "nothing":
-        print("\nDie Zeit vergeht ruhig.")
+        result["text"] = "Die Zeit vergeht ohne besondere Ereignisse."
+
+    return result
 
 
 def run_actions(state):
@@ -86,7 +77,8 @@ def run_actions(state):
             index = int(choice) - 1
 
             if 0 <= index < len(actions):
-                execute_action(state, actions[index])
+                result = execute_action(state, actions[index])
                 break
 
     state.clamp_values()
+    return result

@@ -1,4 +1,4 @@
-from ui import render_game, show_status, show_event, show_atmosphere, choose_option, clear_screen
+from ui import render_game, show_atmosphere, choose_option, clear_screen, show_phase, show_day_end
 from state import GameState
 from systems.resource_system import consume_resources
 from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
@@ -11,6 +11,7 @@ from systems.action_system import run_actions
 from systems.scenario_system import load_scenarios, choose_scenario, apply_scenario_effects
 from systems.information_system import run_information_phase
 from systems.analysis_system import show_analysis
+from systems.crisis_system import update_crisis_phase
 
 
 def apply_event(state, event):
@@ -48,11 +49,22 @@ def run_simulation():
     items = load_items()
 
     while state.running:
+        update_crisis_phase(state)
+
         render_game(state, items)
 
-        consume_resources(state)
+        consumed = consume_resources(state)
 
-        run_actions(state)
+        show_phase(
+            "VERSORGUNG",
+            f"Wasser -{consumed['water']}\nNahrung -{consumed['food']}"
+        )
+
+        action_result = run_actions(state)
+        show_phase(
+            "AKTION",
+            f"{action_result['name']}\n\n{action_result['text']}"
+        )
 
         apply_passive_item_effects(state)
         apply_passive_stress(state)
@@ -61,7 +73,7 @@ def run_simulation():
         valid_events = get_valid_events(state, events)
         event = get_random_event(valid_events)
         state.statistics["events_seen"] += 1
-        show_event(event["text"])
+        show_phase("KRISENEREIGNIS", event["text"])
 
         choices = event["choices"]
         available_choices = []
@@ -81,7 +93,8 @@ def run_simulation():
 
         apply_effects(state, selected_choice["effects"], selected_choice.get("consume"))
 
-        show_status(state, items)
+        show_day_end(state)
+
         atmosphere_text = get_atmosphere_text(state)
         show_atmosphere(atmosphere_text)
 

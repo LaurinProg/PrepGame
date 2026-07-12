@@ -3,10 +3,8 @@
     "id": "radio_broadcast",
     "text": "Über das Radio gibt es neue Informationen zur Lage.",
     "conditions": {
-      "requires": [
-        "radio",
-        "battery"
-      ]
+      "requires": ["radio", "battery"],
+      "phases": ["Schockphase", "Anpassungsphase"]
     },
     "choices": [
       {
@@ -30,14 +28,13 @@
   {
     "id": "darkness",
     "text": "Die Dunkelheit wirkt zunehmend bedrückend. Geräusche aus der Umgebung verstärken die Unsicherheit.",
-    "conditions": {},
+    "conditions": {
+      "phases": ["Schockphase", "Anpassungsphase"]
+    },
     "choices": [
       {
         "text": "Die Taschenlampe benutzen",
-        "requires": [
-          "flashlight",
-          "battery"
-        ],
+        "requires": ["flashlight", "battery"],
         "effects": {
           "stress": -5
         },
@@ -54,43 +51,17 @@
     ]
   },
   {
-    "id": "sleep_problems",
-    "text": "Die Nacht war unruhig. Die fehlende Routine beginnt sich bemerkbar zu machen.",
-    "conditions": {},
-    "choices": [
-      {
-        "text": "Eine ruhige Beschäftigung suchen",
-        "requires": [
-          "book"
-        ],
-        "effects": {
-          "stress": -4
-        }
-      },
-      {
-        "text": "Versuchen weiterzuschlafen",
-        "effects": {
-          "stress": 3
-        }
-      }
-    ]
-  },
-  {
     "id": "power_outage",
     "text": "Die letzten Lichtquellen fallen aus. Die Dunkelheit verändert die Atmosphäre im Raum.",
     "conditions": {
       "min_day": 1,
-      "modifiers": [
-          "darkness"
-        ]
+      "modifiers": ["darkness"],
+      "phases": ["Schockphase"]
     },
     "choices": [
       {
         "text": "Taschenlampe verwenden",
-        "requires": [
-          "flashlight",
-          "battery"
-        ],
+        "requires": ["flashlight", "battery"],
         "effects": {
           "stress": -5
         },
@@ -110,15 +81,13 @@
     "id": "uncertain_information",
     "text": "Über verschiedene Kanäle kursieren widersprüchliche Meldungen. Niemand weiß genau, was passiert.",
     "conditions": {
-      "min_day": 2
+      "min_day": 2,
+      "phases": ["Schockphase", "Anpassungsphase"]
     },
     "choices": [
       {
         "text": "Radio nutzen und Informationen sammeln",
-        "requires": [
-          "radio",
-          "battery"
-        ],
+        "requires": ["radio", "battery"],
         "effects": {
           "information": 10,
           "stress": -3
@@ -136,10 +105,33 @@
     ]
   },
   {
+    "id": "sleep_problems",
+    "text": "Die Nacht war unruhig. Die fehlende Routine beginnt sich bemerkbar zu machen.",
+    "conditions": {
+      "phases": ["Anpassungsphase", "Erschöpfungsphase"]
+    },
+    "choices": [
+      {
+        "text": "Eine ruhige Beschäftigung suchen",
+        "requires": ["book"],
+        "effects": {
+          "stress": -4
+        }
+      },
+      {
+        "text": "Versuchen weiterzuschlafen",
+        "effects": {
+          "stress": 3
+        }
+      }
+    ]
+  },
+  {
     "id": "cold_night",
     "text": "Die Temperatur sinkt deutlich. Die Kälte erschwert die Erholung.",
     "conditions": {
-      "min_day": 2
+      "min_day": 2,
+      "phases": ["Anpassungsphase", "Erschöpfungsphase"]
     },
     "choices": [
       {
@@ -149,10 +141,8 @@
         }
       },
       {
-        "text": "Sich mit Beschäftigung ablenken",
-        "requires": [
-          "book"
-        ],
+        "text": "Sich mit einem Buch ablenken",
+        "requires": ["book"],
         "effects": {
           "stress": 1
         }
@@ -164,14 +154,13 @@
     "text": "Gerüchte machen die Runde. Die Unsicherheit belastet die Stimmung.",
     "conditions": {
       "min_day": 3,
-      "max_stress": 70
+      "max_stress": 70,
+      "phases": ["Anpassungsphase"]
     },
     "choices": [
       {
         "text": "Informationen prüfen",
-        "requires": [
-          "radio"
-        ],
+        "requires": ["radio"],
         "effects": {
           "information": 5,
           "stress": -2
@@ -189,7 +178,8 @@
     "id": "battery_problem",
     "text": "Einige Geräte benötigen mehr Energie als erwartet. Die Batterievorräte wirken plötzlich begrenzt.",
     "conditions": {
-      "min_day": 4
+      "min_day": 4,
+      "phases": ["Anpassungsphase", "Erschöpfungsphase"]
     },
     "choices": [
       {
@@ -210,20 +200,62 @@
     "id": "loneliness",
     "text": "Die Isolation wird spürbar. Die fehlende Normalität belastet die Stimmung.",
     "conditions": {
-      "min_day": 5
+      "min_day": 5,
+      "phases": ["Erschöpfungsphase"]
     },
     "choices": [
       {
         "text": "Ein Buch lesen",
-        "requires": [
-          "book"
-        ],
+        "requires": ["book"],
         "effects": {
           "stress": -5
         }
       },
       {
         "text": "Die Zeit einfach verstreichen lassen",
+        "effects": {
+          "stress": 5
+        }
+      }
+    ]
+  },
+  {
+    "id": "hope_fades",
+    "text": "Die Krise dauert länger als erwartet. Die Hoffnung auf ein baldiges Ende schwindet.",
+    "conditions": {
+      "phases": ["Erschöpfungsphase"]
+    },
+    "choices": [
+      {
+        "text": "Sich auf kleine erreichbare Ziele konzentrieren",
+        "effects": {
+          "stress": -6
+        }
+      },
+      {
+        "text": "Sich von den Sorgen überwältigen lassen",
+        "effects": {
+          "stress": 7
+        }
+      }
+    ]
+  },
+  {
+    "id": "daily_routine",
+    "text": "Ein geregelter Tagesablauf könnte helfen, die Belastung besser zu bewältigen.",
+    "conditions": {
+      "phases": ["Erschöpfungsphase"]
+    },
+    "choices": [
+      {
+        "text": "Eine feste Routine einführen",
+        "effects": {
+          "stress": -8,
+          "information": 2
+        }
+      },
+      {
+        "text": "Jeden Tag spontan angehen",
         "effects": {
           "stress": 5
         }

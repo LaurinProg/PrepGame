@@ -42,6 +42,11 @@ def get_valid_events(state, events):
             if not state.modifiers.get(modifier, False):
                 allowed = False
 
+        required_phases = conditions.get("phases")
+
+        if required_phases and state.crisis_phase not in required_phases:
+            allowed = False
+
         if allowed:
             valid.append(event)
 

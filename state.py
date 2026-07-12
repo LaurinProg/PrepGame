@@ -9,6 +9,8 @@ class GameState:
         self.stress = 20
         self.information = 50
 
+        self.crisis_phase = "Schockphase"
+
         self.statistics = {
             "starting_stress": self.stress,
             "highest_stress": self.stress,

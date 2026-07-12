@@ -1,5 +1,7 @@
 from rich.console import Console
 from rich.panel import Panel
+from rich.columns import Columns
+from rich.table import Table
 from config import MAX_INVENTORY_WEIGHT
 
 console = Console()
@@ -11,9 +13,18 @@ def clear_screen():
 
 def render_game(state, items):
     clear_screen()
+
     show_day_header(state.day)
-    show_status(state, items)
-    show_inventory(state.inventory, items)
+
+    console.print(
+        Columns(
+            [
+                create_status_panel(state, items),
+                create_inventory_panel(state, items)
+            ],
+            equal=True
+        )
+    )
 
 
 def show_day_header(day):
@@ -26,51 +37,57 @@ def show_day_header(day):
     )
 
 
-def create_bar(value, maximum=100, length=10):
-    filled = int((value / maximum) * length)
-    return "█" * filled + "░" * (length - filled)
-
-
-def show_status(state, items):
+def create_status_panel(state, items):
     stress_bar = create_bar(state.stress)
     info_bar = create_bar(state.information)
 
     weight = calculate_weight(state.inventory, items)
 
     if state.stress >= 75:
-        condition = "Kritische psychische Belastung"
+        condition = "Kritisch"
     elif state.stress >= 50:
-        condition = "Erhöhte Belastung"
+        condition = "Belastet"
     elif state.stress >= 25:
-        condition = "Angespannte Lage"
+        condition = "Angespannt"
     else:
-        condition = "Stabile Situation"
-
-    scenario_name = "Unbekannte Krise"
-
-    if state.scenario:
-        scenario_name = state.scenario["name"]
+        condition = "Stabil"
 
     content = (
-        f"Szenario:\n"
-        f"{scenario_name}\n\n"
-        f"Psychische Belastung:\n"
-        f"{stress_bar} {state.stress}/100\n\n"
-        f"Informationslage:\n"
-        f"{info_bar} {state.information}/100\n\n"
-        f"Gewicht:\n"
-        f"{weight}/{MAX_INVENTORY_WEIGHT}\n\n"
-        f"Lageeinschätzung:\n"
-        f"{condition}"
+        f"Phase: {state.crisis_phase}\n\n"
+        f"Stress: {stress_bar} {state.stress}\n"
+        f"Info:   {info_bar} {state.information}\n\n"
+        f"Gewicht: {weight}/{MAX_INVENTORY_WEIGHT}\n"
+        f"Lage: {condition}"
     )
 
-    console.print(
-        Panel(
-            content,
-            title="STATUS",
-            style="bold"
-        )
+    return Panel(content, title="STATUS")
+
+
+def create_inventory_panel(state, items):
+
+    table = Table(
+        show_header=False,
+        box=None
     )
+
+    table.add_column()
+
+    for item in items:
+        quantity = state.inventory.get(item["id"], 0)
+
+        if quantity > 0:
+            table.add_row(f"{item['name']}: x{quantity}")
+
+    return Panel(table, title="INVENTAR")
+
+
+def create_bar(value, maximum=100, length=10):
+    filled = int((value / maximum) * length)
+    return "█" * filled + "░" * (length - filled)
+
+
+def show_phase(title, text):
+    console.print(Panel(text, title=title))
 
 
 def calculate_weight(inventory, items):
@@ -101,12 +118,6 @@ def show_inventory(inventory, items):
             )
 
 
-def show_event(text):
-    console.print(
-        f"\n[yellow]{text}[/yellow]\n"
-    )
-
-
 def show_atmosphere(text):
     console.print(
         f"\n[italic]{text}[/italic]"
@@ -114,7 +125,12 @@ def show_atmosphere(text):
 
 
 def choose_option(choices):
-    console.print()
+    console.print(
+        Panel(
+            "Welche Entscheidung triffst du?",
+            title="ENTSCHEIDUNG"
+        )
+    )
 
     for index, choice in enumerate(choices, start=1):
         console.print(
@@ -129,3 +145,22 @@ def choose_option(choices):
 
             if 1 <= number <= len(choices):
                 return choices[number - 1]
+
+
+def show_day_end(state):
+    if state.stress >= 75:
+        condition = "Kritische Belastung"
+    elif state.stress >= 50:
+        condition = "Belastete Lage"
+    elif state.stress >= 25:
+        condition = "Angespannte Lage"
+    else:
+        condition = "Stabile Lage"
+
+    content = (
+        f"Stress: {state.stress}/100\n"
+        f"Information: {state.information}/100\n"
+        f"Lage: {condition}"
+    )
+
+    console.print(Panel(content, title="TAGESENDE"))
