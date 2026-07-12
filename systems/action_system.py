@@ -52,7 +52,7 @@ def execute_action(state, action):
     }
 
     if action == "radio":
-        apply_effects(state, {"information": 10, "stress": -2}, {"battery": 1})
+        apply_effects(state, {"information": 8, "stress": -3}, {"battery": 1})
         result["text"] = "Neue Informationen wurden empfangen."
 
     elif action == "book":
@@ -60,6 +60,7 @@ def execute_action(state, action):
         result["text"] = "Die Ruhephase hilft, Stress abzubauen."
 
     elif action == "nothing":
+        apply_effects(state, {"stress": -1})
         result["text"] = "Die Zeit vergeht ohne besondere Ereignisse."
 
     return result

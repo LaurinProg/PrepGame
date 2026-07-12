@@ -12,6 +12,7 @@ from systems.scenario_system import load_scenarios, choose_scenario, apply_scena
 from systems.information_system import run_information_phase
 from systems.analysis_system import show_analysis
 from systems.crisis_system import update_crisis_phase
+from systems.log_system import clear_log
 
 
 def apply_event(state, event):
@@ -50,6 +51,7 @@ def run_simulation():
 
     while state.running:
         update_crisis_phase(state)
+        clear_log(state)
 
         render_game(state, items)
 

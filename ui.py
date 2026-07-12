@@ -163,4 +163,30 @@ def show_day_end(state):
         f"Lage: {condition}"
     )
 
+    categories = {
+        "resource": "Versorgung",
+        "action": "Aktionen",
+        "event": "Ereignisse",
+        "stress": "Stress"
+    }
+
+    log_text = ""
+
+    for category, title in categories.items():
+        entries = [
+            entry["text"]
+            for entry in state.daily_log
+            if entry["category"] == category
+        ]
+
+        if not entries:
+            continue
+
+        log_text += f"\n{title}\n"
+
+        for entry in entries:
+            log_text += f"• {entry}\n"
+
+    content += log_text
+
     console.print(Panel(content, title="TAGESENDE"))

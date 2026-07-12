@@ -10,6 +10,7 @@ class GameState:
         self.information = 50
 
         self.crisis_phase = "Schockphase"
+        self.daily_log = []
 
         self.statistics = {
             "starting_stress": self.stress,
