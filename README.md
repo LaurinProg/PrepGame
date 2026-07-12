@@ -126,18 +126,32 @@ Das Projekt ist modular aufgebaut:
 project/
 │
 ├── systems/
+│   ├── action_system.py
+│   ├── analysis_system.py
+│   ├── atmosphere_system.py
+│   ├── crisis_system.py
+│   ├── effect_system.py
 │   ├── event_system.py
+│   ├── information_system.py
 │   ├── inventory_system.py
-│   ├── stress_system.py
+│   ├── item_effect_system.py
+│   ├── log_system.py
+│   ├── preparation_system.py
+│   ├── recommendation_system.py
 │   ├── resource_system.py
+│   ├── stress_system.py
 │   ├── scenario_system.py
-│   └── analysis_system.py
+│   └── stress_tracking.py
 │
 ├── data/
 │   ├── events.json
+│   ├── items.json
+│   ├── recommendations.json
 │   └── scenarios.json
 │
 ├── ui.py
+├── config.py
+├── items.py
 ├── simulation.py
 ├── state.py
 └── main.py
