@@ -10,6 +10,7 @@ from systems.item_effect_system import apply_passive_item_effects
 from systems.action_system import run_actions
 from systems.scenario_system import load_scenarios, choose_scenario, apply_scenario_effects
 from systems.information_system import run_information_phase
+from systems.analysis_system import show_analysis
 
 
 def apply_event(state, event):
@@ -59,6 +60,7 @@ def run_simulation():
 
         valid_events = get_valid_events(state, events)
         event = get_random_event(valid_events)
+        state.statistics["events_seen"] += 1
         show_event(event["text"])
 
         choices = event["choices"]
@@ -88,3 +90,5 @@ def run_simulation():
         state.day += 1
 
         input("\nENTER für nächsten Tag...")
+
+    show_analysis(state)

@@ -9,6 +9,18 @@ class GameState:
         self.stress = 20
         self.information = 50
 
+        self.statistics = {
+            "starting_stress": self.stress,
+            "highest_stress": self.stress,
+            "water_consumed": 0,
+            "food_consumed": 0,
+            "battery_used": 0,
+            "items_used": 0,
+            "events_seen": 0,
+            "actions_taken": 0,
+            "stress_sources": {}
+        }
+
         self.inventory = {
             "water": 10,
             "food": 10,
@@ -22,3 +34,6 @@ class GameState:
     def clamp_values(self):
         self.stress = max(0, min(100, self.stress))
         self.information = max(0, min(100, self.information))
+
+        if self.stress > self.statistics["highest_stress"]:
+            self.statistics["highest_stress"] = self.stress

@@ -44,6 +44,8 @@ def show_actions(actions):
 
 
 def execute_action(state, action):
+    state.statistics["actions_taken"] += 1
+
     if action == "radio":
         apply_effects(
             state,

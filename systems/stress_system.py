@@ -1,4 +1,5 @@
 from systems.inventory_system import get_quantity, remove_item
+from systems.stress_tracking import add_stress
 
 
 def apply_passive_stress(state):
@@ -9,13 +10,13 @@ def apply_passive_stress(state):
         state.stress += 3
 
     if water <= 3:
-        state.stress += 6
+        add_stress(state, 6, "Wassermangel")
 
     if food <= 3:
-        state.stress += 4
+        add_stress(state, 4, "Nahrungsmangel")
 
     if state.information <= 30:
-        state.stress += 5
+        add_stress(state, 5, "Informationsmangel")
 
     if state.information >= 70:
         state.stress -= 2
