@@ -10,8 +10,8 @@
       {
         "text": "Den Nachrichten aufmerksam zuhören",
         "effects": {
-          "stress": -10,
-          "information": 15
+          "stress": -6,
+          "information": 10
         },
         "consume": {
           "battery": 1
@@ -20,7 +20,7 @@
       {
         "text": "Das Radio ausschalten, um Energie zu sparen",
         "effects": {
-          "stress": 5
+          "stress": 4
         }
       }
     ]
@@ -36,7 +36,7 @@
         "text": "Die Taschenlampe benutzen",
         "requires": ["flashlight", "battery"],
         "effects": {
-          "stress": -5
+          "stress": -4
         },
         "consume": {
           "battery": 1
@@ -45,7 +45,7 @@
       {
         "text": "Im Dunkeln bleiben",
         "effects": {
-          "stress": 8
+          "stress": 5
         }
       }
     ]
@@ -63,7 +63,7 @@
         "text": "Taschenlampe verwenden",
         "requires": ["flashlight", "battery"],
         "effects": {
-          "stress": -5
+          "stress": -4
         },
         "consume": {
           "battery": 1
@@ -72,7 +72,7 @@
       {
         "text": "Energie sparen und warten",
         "effects": {
-          "stress": 5
+          "stress": 4
         }
       }
     ]
@@ -89,7 +89,7 @@
         "text": "Radio nutzen und Informationen sammeln",
         "requires": ["radio", "battery"],
         "effects": {
-          "information": 10,
+          "information": 8,
           "stress": -3
         },
         "consume": {
@@ -99,7 +99,7 @@
       {
         "text": "Keine Energie verschwenden",
         "effects": {
-          "stress": 5
+          "stress": 4
         }
       }
     ]
@@ -121,7 +121,7 @@
       {
         "text": "Versuchen weiterzuschlafen",
         "effects": {
-          "stress": 3
+          "stress": 2
         }
       }
     ]
@@ -137,14 +137,14 @@
       {
         "text": "Die Situation akzeptieren",
         "effects": {
-          "stress": 6
+          "stress": 4
         }
       },
       {
         "text": "Sich mit einem Buch ablenken",
         "requires": ["book"],
         "effects": {
-          "stress": 1
+          "stress": 0
         }
       }
     ]
@@ -162,14 +162,14 @@
         "text": "Informationen prüfen",
         "requires": ["radio"],
         "effects": {
-          "information": 5,
+          "information": 4,
           "stress": -2
         }
       },
       {
         "text": "Den Gerüchten glauben",
         "effects": {
-          "stress": 8
+          "stress": 5
         }
       }
     ]
@@ -191,7 +191,7 @@
       {
         "text": "Sich Sorgen machen",
         "effects": {
-          "stress": 5
+          "stress": 4
         }
       }
     ]
@@ -214,7 +214,7 @@
       {
         "text": "Die Zeit einfach verstreichen lassen",
         "effects": {
-          "stress": 5
+          "stress": 4
         }
       }
     ]
@@ -229,13 +229,13 @@
       {
         "text": "Sich auf kleine erreichbare Ziele konzentrieren",
         "effects": {
-          "stress": -6
+          "stress": -5
         }
       },
       {
         "text": "Sich von den Sorgen überwältigen lassen",
         "effects": {
-          "stress": 7
+          "stress": 5
         }
       }
     ]
@@ -250,14 +250,14 @@
       {
         "text": "Eine feste Routine einführen",
         "effects": {
-          "stress": -8,
+          "stress": -6,
           "information": 2
         }
       },
       {
         "text": "Jeden Tag spontan angehen",
         "effects": {
-          "stress": 5
+          "stress": 3
         }
       }
     ]

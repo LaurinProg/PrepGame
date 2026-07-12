@@ -13,6 +13,7 @@ from systems.information_system import run_information_phase
 from systems.analysis_system import show_analysis
 from systems.crisis_system import update_crisis_phase
 from systems.log_system import clear_log
+from config import MAX_DAYS
 
 
 def apply_event(state, event):
@@ -103,7 +104,17 @@ def run_simulation():
         check_game_over(state)
 
         state.day += 1
+        if state.day > MAX_DAYS:
+            state.running = False
 
         input("\nENTER für nächsten Tag...")
+
+    if state.day > MAX_DAYS:
+        clear_screen()
+
+        print("\nDie akute Krisensituation ist vorerst überstanden.")
+        print("Nun folgt die Auswertung deiner Entscheidungen.")
+
+        input("\nENTER...")
 
     show_analysis(state)

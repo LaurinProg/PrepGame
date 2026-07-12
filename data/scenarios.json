@@ -10,7 +10,7 @@
     ],
     "effects": {
       "information": -10,
-      "stress": 10
+      "stress": 8
     },
     "modifiers": {
       "darkness": true,
@@ -32,7 +32,8 @@
       "Die Versorgungslage ist schwer einzuschätzen."
     ],
     "effects": {
-      "stress": 15
+      "stress": 10,
+      "information": -5
     },
     "modifiers": {
       "water_pressure": true,
@@ -53,7 +54,7 @@
       "Die Dauer der Situation ist unklar."
     ],
     "effects": {
-      "stress": 5,
+      "stress": 8,
       "information": -5
     },
     "modifiers": {
