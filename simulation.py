@@ -1,4 +1,4 @@
-from ui import show_day_header, show_status, show_event, show_atmosphere, choose_option, show_inventory, clear_screen
+from ui import render_game, show_status, show_event, show_atmosphere, choose_option
 from state import GameState
 from systems.resource_system import consume_resources
 from systems.event_system import load_events, get_valid_events, get_random_event, apply_effects
@@ -37,9 +37,7 @@ def run_simulation():
     items = load_items()
 
     while state.running:
-        clear_screen()
-        show_day_header(state.day)
-        show_inventory(state.inventory, items)
+        render_game(state, items)
 
         consume_resources(state)
 
@@ -71,7 +69,7 @@ def run_simulation():
 
         apply_effects(state, selected_choice["effects"], selected_choice.get("consume"))
 
-        show_status(state.to_dict())
+        show_status(state)
         atmosphere_text = get_atmosphere_text(state)
         show_atmosphere(atmosphere_text)
 
