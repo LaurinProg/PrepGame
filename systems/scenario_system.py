@@ -23,6 +23,8 @@ def apply_scenario_effects(state, scenario):
     state.stress += effects.get("stress", 0)
     state.information += effects.get("information", 0)
 
+    state.modifiers = scenario.get("modifiers", {})
+
     state.clamp_values()
 
 

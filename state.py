@@ -4,6 +4,7 @@ class GameState:
 
         self.day = 1
         self.scenario = None
+        self.modifiers = {}
 
         self.stress = 20
         self.information = 50
